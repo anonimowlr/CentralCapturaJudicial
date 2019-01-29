@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="800.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centralcapturasjudicial.controller.CartaoCreditoAnchorPaneController">
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+    </stylesheets>
+   <children>
+      <JFXButton layoutX="300.0" layoutY="260.0" onAction="#handleButtonCartaoPJ" prefHeight="50.0" prefWidth="200.0" text="Pessoa Jurídica" />
+      <JFXButton layoutX="300.0" layoutY="178.0" onAction="#handleButtonCartaoPF" prefHeight="50.0" prefWidth="200.0" text="Pessoa Física" />
+   </children>
+</AnchorPane>

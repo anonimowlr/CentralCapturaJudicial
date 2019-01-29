@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" prefHeight="480.0" prefWidth="200.0" style="-fx-background-color: #4d4d4d;" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centralcapturasjudicial.controller.MenuOpcoesAnchorPaneController">
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+    </stylesheets>
+   <children>
+      <VBox alignment="CENTER" layoutX="27.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="200.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton layoutX="54.0" layoutY="23.0" onAction="#handleButtonCartaoCredito" prefWidth="190.0" text="Cartão de Crédito" />
+            <JFXButton layoutX="54.0" layoutY="68.0" onAction="#handleButtonContaCorrente" prefWidth="190.0" text="ContaCorrente" />
+            <JFXButton layoutX="54.0" layoutY="68.0" onAction="#handleButtonCdc" prefWidth="190.0" text="CDC/FIN" />
+            <JFXButton layoutX="54.0" layoutY="165.0" onAction="#handleButtonBBGiro" prefWidth="190.0" text="BB Giro" />
+            <JFXButton layoutX="54.0" layoutY="213.0" prefWidth="190.0" text="Cédulas Rurais" />
+            <JFXButton layoutX="54.0" layoutY="260.0" prefWidth="190.0" text="Leasing" />
+            <JFXButton layoutX="54.0" layoutY="308.0" prefWidth="190.0" text="Desconto de Cheques" />
+            <JFXButton layoutX="54.0" layoutY="359.0" prefWidth="190.0" text="Desconto de Títulos" />
+            <JFXButton layoutX="54.0" layoutY="408.0" prefWidth="190.0" text="CPR" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,12 @@
+/nbproject/private/
+/build/
+/dist/
+/build.xml
+/nbbuild.xml
+/nbproject/build-impl.xml
+/nbproject/configs/Executar_como_WebStart.properties
+/nbproject/configs/Executar_no_Browser.properties
+/nbproject/genfiles.properties
+/nbproject/jfx-impl.xml
+/nbproject/project.properties
+/nbproject/project.xml

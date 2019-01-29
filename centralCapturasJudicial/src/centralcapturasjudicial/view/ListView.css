@@ -1,0 +1,19 @@
+/* 
+    Created on : 04/04/2018, 13:43:03
+    Author     : f8940147
+*/
+
+.list-view {    -fx-background-color:#676767;}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {   
+    -fx-background-color: #265285;
+    -fx-text-fill: white;
+}
+
+.list-cell { -fx-text-fill: white; }
+.list-cell:odd { -fx-background-color: #3a3a3a;  }
+.list-cell:even { -fx-background-color: #676767;  }
+.list-cell:filled:hover {     
+    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white; 
+}
