@@ -8,6 +8,7 @@ package centralcapturasjudicial.sisbb;
 import antlr.ANTLRTokdefParserTokenTypes;
 import br.com.bb.jibm3270.RoboException;
 import centralcapturasjudicial.model.dao.BBGiroDAO;
+import centralcapturasjudicial.model.entity.bbgiro.AberturaTeto;
 import centralcapturasjudicial.model.entity.bbgiro.EncargoSubcredito;
 import centralcapturasjudicial.model.entity.bbgiro.ExtratoConsolidado;
 import centralcapturasjudicial.model.entity.bbgiro.ExtratoSubcredito;
@@ -41,8 +42,7 @@ public class CapturaBBGiro {
         String operacao = inputOpBBGiro.getText();
         String data_proposta;
 
-        // try {
-        // sisbb = new JanelaSisbb();
+        
         sisbb.setTamanho(1000, 700);
 
         sisbb.Aplicativo(System.getProperty("user.name"), "COP", true); //Verificar qual aplicativo o funcionário vai querer usar.
@@ -107,13 +107,7 @@ public class CapturaBBGiro {
         dadosGerais.setTxLinhaCredito(sisbb.copiar(5, 21, 50).trim());
         dadosGerais.setNrOperacao(Integer.parseInt(operacao));
 
-        //dadosGerais = extratoConsolidado(sisbb, data_proposta, dadosGerais);
-        // dadosGerais = itensFinanciados(sisbb, data_proposta, dadosGerais);
-        // c.save(dadosGerais);
-//        } catch (Exception e) {
-//
-//            System.out.println(e);
-//        }
+     
         return dadosGerais;
 
     }
@@ -162,14 +156,16 @@ public class CapturaBBGiro {
         int linha = 14;
 
         do {
-             Thread.sleep(100);
             
+            Thread.sleep(100);
+
             ExtratoConsolidado ec = new ExtratoConsolidado();
 
             ec.setOperacaoGiro(dadosGerais);
 
-            Thread.sleep(100);
-
+          
+             Thread.sleep(100);
+             
             data_mov = sisbb.copiar(linha, 3, 10).replace(".", "-");
 
             date = (Date) formatter.parse(data_mov);
@@ -187,7 +183,7 @@ public class CapturaBBGiro {
                 valor = ("-").concat(valor);
 
             }
-            
+
             System.out.println(valor);
 
             ec.setVlLancamento(Double.parseDouble(valor));
@@ -219,28 +215,12 @@ public class CapturaBBGiro {
         LACO:
         do {
 
-            // Thread.sleep(100);
+         //   Thread.sleep(100);
+            
             ExtratoConsolidado ec = new ExtratoConsolidado();
 
             ec.setOperacaoGiro(dadosGerais);
 
-//            if (sisbb.copiar(linha2, 31, 7).equals("parcial") & (linha2 == 19)) {
-//
-//                sisbb.teclar("@8");
-//                linha2 = 12;
-//                Thread.sleep(100);
-//
-//                if (sisbb.copiar(23, 3, 6).equals("Ultima")) {
-//
-//                    break LACO;
-//                }
-//
-//            }
-//
-//            if (sisbb.copiar(linha2, 31, 7).equals("parcial")) {
-//                linha2++;
-//                Thread.sleep(100);
-//            }
             data_mov = sisbb.copiar(linha2, 3, 10).replace(".", "-");
 
             date = (Date) formatter.parse(data_mov);
@@ -260,7 +240,6 @@ public class CapturaBBGiro {
             }
             String situacaoo = ec.getTxDescricaoLancamento();
 
-            // System.out.println(situacaoo + valor);
             ec.setVlLancamento(Double.parseDouble(valor));
 
             linha2++;
@@ -282,7 +261,10 @@ public class CapturaBBGiro {
                 System.out.println(valor1);;
 
             }
-
+            
+            
+             Thread.sleep(100);
+            
         } while (!sisbb.copiar(23, 3, 6).equals("Ultima"));
 
         dadosGerais.setListExtratoConsolidado(listaExtCon);
@@ -349,7 +331,7 @@ public class CapturaBBGiro {
 
                 }
 
-                //itemf.setTxItemFinanciado(sisbb.copiar(linhaSisbb, 29, 19));
+               
                 if (linhaVerificacao > 19) {
 
                     sisbb.teclar("@8");
@@ -566,19 +548,9 @@ public class CapturaBBGiro {
 
         int linhaSisbb = 7;
         int linhaVerificacao = 7;
-        
+
         BREAKDO:
         do {
-
-            //enc_sub.setItemFinanciado(itemFinanciado);
-            // if (sisbb.copiar(7, 33, 7).equals("CAPITAL")) {
-            //  String itemFin_encargo = sisbb.copiar(linhaSisbb, 29, 19);
-            // sisbb.colar(linhaSisbb, 27, "X");
-            // Thread.sleep(200);
-            // sisbb.teclarAguardarTroca("@E");
-          //  sisbb.aguardarInd(1, 3, "COPM1142");
-           // sisbb.teclarAguardarTroca("@2");
-          //  sisbb.aguardarInd(1, 3, "COPM7545");
 
             listaEncargoSub.clear();
 
@@ -614,13 +586,9 @@ public class CapturaBBGiro {
 
                 sisbb.colar(linhaSisbb, 27, "X");
 
-               
-
-                
-
                 sisbb.teclarAguardarTroca("@E");
-                 Thread.sleep(200);
-                
+                Thread.sleep(200);
+
                 String itemFin_encargo = sisbb.copiar(7, 20, 21).trim();
 
                 sisbb.aguardarInd(1, 3, "COPM1142");
@@ -692,6 +660,128 @@ public class CapturaBBGiro {
         } while (!sisbb.copiar(23, 3, 6).equals("Ultima"));
 
         return listaRetorno;
+    }
+
+    public OperacaoGiro aberturaTeto(JanelaSisbb sisbb, OperacaoGiro dadosGerais) throws RoboException, ParseException, InterruptedException {
+        
+        
+        
+        
+        
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date dataInicio = new Date();
+        Date dataFim = new Date();
+         List<AberturaTeto> ListaAberturaTeto = new ArrayList();
+         
+           sisbb.aguardarInd(4, 27, "Item");
+           
+            sisbb.teclarAguardarTroca("@3");
+              
+                        
+           sisbb.aguardarInd(1, 3, "COPM1115");
+           
+           sisbb.teclarAguardarTroca("@E");
+            
+           sisbb.aguardarInd(4, 27, "Item");  
+
+        if (sisbb.copiar(6, 33, 8).equals("ABERTURA")) {
+
+            sisbb.colar(6, 27, "X");
+
+            sisbb.teclarAguardarTroca("@E");
+
+            sisbb.aguardarInd(1, 3, "COPM1142");
+
+            sisbb.teclarAguardarTroca("@2");
+
+            sisbb.aguardarInd(1, 3, "COPM7545");
+
+            sisbb.teclarAguardarTroca("@2");
+
+            sisbb.aguardarInd(7, 13, "Inicio");
+
+          
+
+            int linha = 9;
+            
+            
+            
+            do{
+                
+                  AberturaTeto ab = new AberturaTeto();
+                  
+                  ab.setOperacaoGiro(dadosGerais);
+           
+
+            String data_inicio = sisbb.copiar(linha, 13, 10).replace(".", "-");
+            String data_fim = sisbb.copiar(linha, 24, 10).replace(".", "-");
+            
+                System.out.println(data_fim);
+
+            if (!data_inicio.equals("")) {
+
+                dataInicio = (Date) formatter.parse(data_inicio);
+                ab.setDtInicio(dataInicio);
+
+            }
+
+            if (!data_fim.equals("")) {
+                
+                dataFim = (Date) formatter.parse(data_fim);
+                ab.setDtFim(dataFim);
+            }
+
+            String taxa = sisbb.copiar(linha, 40, 5).replace(",",  ".");
+
+            String situacao = sisbb.copiar(linha, 37, 1);
+
+            if (situacao.equals("-")) {
+
+                taxa = ("-").concat(taxa);
+
+            }
+            
+
+            ab.setVlTaxa(Double.parseDouble(taxa));
+            
+            
+            ListaAberturaTeto.add(ab);
+            
+            
+            dadosGerais.setListAberturaTeto(ListaAberturaTeto);
+            
+              linha++;
+            
+          if(linha == 19){
+              
+              sisbb.teclarAguardarTroca("@8");
+              linha = 9;
+              
+              
+              Thread.sleep(100);             
+              
+          }  
+            
+          
+            
+            
+            
+             }while (!sisbb.copiar(linha, 40, 5 ).equals(""));
+            
+
+        } else {
+            
+            
+            
+            
+            
+            
+
+        }
+
+        return dadosGerais;
+
     }
 
 }

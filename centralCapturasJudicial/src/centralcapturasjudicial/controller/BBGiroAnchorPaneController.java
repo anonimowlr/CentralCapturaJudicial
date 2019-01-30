@@ -57,8 +57,16 @@ public class BBGiroAnchorPaneController extends AbstractController implements In
         BBGiroDAO dao = new BBGiroDAO();         //Thu Jun 25 00:00:00 BRT 2009
         SimpleDateFormat in= new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
         SimpleDateFormat out = new SimpleDateFormat("ddMMyyyy");
+        
+        
+       String op = inputOpBBGiro.getText();
  
-
+   try {
+           dao.removeRegistroBBGiro(Integer.parseInt(op));
+        } catch (Exception ex) {
+            System.out.println(ex);
+            throw new Exception(ex);
+        }
          
         
          
@@ -68,9 +76,11 @@ public class BBGiroAnchorPaneController extends AbstractController implements In
 
         try {
             
+            
         JanelaSisbb sisbb = new JanelaSisbb();
 
         dadosGerais = captura.capturaDadosGerais(sisbb, inputOpBBGiro, inputAgenciaBBGiro);
+        
         Date data_proposta = dadosGerais.getDtProposta();
         
         String dataProposta = out.format(in.parse(data_proposta.toString()));
@@ -79,6 +89,8 @@ public class BBGiroAnchorPaneController extends AbstractController implements In
         dadosGerais = captura.extratoConsolidado(sisbb, dataProposta, dadosGerais);
          
         dadosGerais = captura.itensFinanciados(sisbb, dataProposta, dadosGerais);
+        
+        dadosGerais = captura.aberturaTeto(sisbb, dadosGerais);
         
         dao.save(dadosGerais);
             
