@@ -36,7 +36,7 @@ public class CapturaBBGiro {
     public OperacaoGiro capturaDadosGerais(JanelaSisbb sisbb, JFXTextField inputOpBBGiro, JFXTextField inputAgenciaBBGiro) throws PropertyVetoException, Throwable { // pega os dados principais da operação
 
         OperacaoGiro dadosGerais = new OperacaoGiro();
-        BBGiroDAO c = new BBGiroDAO();
+        //BBGiroDAO c = new BBGiroDAO();
 
         int agencia = Integer.parseInt(inputAgenciaBBGiro.getText());
         String operacao = inputOpBBGiro.getText();
@@ -248,7 +248,7 @@ public class CapturaBBGiro {
 
                 sisbb.teclar("@8");
                 linha2 = 12;
-                Thread.sleep(100);
+                Thread.sleep(90);
 
             }
 
@@ -263,7 +263,7 @@ public class CapturaBBGiro {
             }
             
             
-             Thread.sleep(100);
+             Thread.sleep(90);
             
         } while (!sisbb.copiar(23, 3, 6).equals("Ultima"));
 
