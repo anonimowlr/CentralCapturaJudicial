@@ -21,7 +21,7 @@
             <JFXButton layoutX="54.0" layoutY="68.0" onAction="#handleButtonCdc" prefWidth="190.0" text="CDC/FIN" />
             <JFXButton layoutX="54.0" layoutY="165.0" onAction="#handleButtonBBGiro" prefWidth="190.0" text="BB Giro" />
             <JFXButton layoutX="54.0" layoutY="213.0" prefWidth="190.0" text="Cédulas Rurais" />
-            <JFXButton layoutX="54.0" layoutY="260.0" prefWidth="190.0" text="Leasing" />
+            <JFXButton layoutX="54.0" layoutY="260.0" onAction="#handleButtonLeasing" prefWidth="190.0" text="Leasing" />
             <JFXButton layoutX="54.0" layoutY="308.0" prefWidth="190.0" text="Desconto de Cheques" />
             <JFXButton layoutX="54.0" layoutY="359.0" prefWidth="190.0" text="Desconto de Títulos" />
             <JFXButton layoutX="54.0" layoutY="408.0" prefWidth="190.0" text="CPR" />
